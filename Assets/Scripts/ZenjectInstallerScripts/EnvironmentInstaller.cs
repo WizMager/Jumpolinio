@@ -1,4 +1,5 @@
-﻿using ComponentsMonoScripts;
+﻿using System.Collections.Generic;
+using ComponentsMonoScripts;
 using Data;
 using Factory;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace ZenjectInstallerScripts
             var platformInstance = Container.InstantiatePrefabForComponent<AllPlatformsComponents>(allPlatformsPrefab, environmentRoot);
             Container.Bind<CrystalData>().FromScriptableObject(crystalData).AsSingle().NonLazy();
             Container.Bind<AllPlatformsComponents>().FromInstance(platformInstance).AsSingle().NonLazy();
-            Container.Bind<CrystalView>().FromFactory<CrystalFactory>().AsSingle();
+            Container.Bind<List<CrystalView>>().FromFactory<CrystalFactory>().AsSingle();
         }
     }
 }

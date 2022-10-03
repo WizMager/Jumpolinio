@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using Views;
 
 namespace ComponentsMonoScripts
 {
     public class AllPlatformsComponents : MonoBehaviour
     {
         [SerializeField] private PlatformComponents[] platformComponentsArray;
+        [SerializeField] private PortalView portalView;
 
         public Transform[] GetCrystalSpawnPositions
         {
@@ -18,5 +20,7 @@ namespace ComponentsMonoScripts
                 return spawnPositions;
             }
         }
+
+        public PortalView GetPortalView => portalView;
     }
 }

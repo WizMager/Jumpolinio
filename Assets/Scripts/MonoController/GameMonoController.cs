@@ -9,11 +9,12 @@ namespace MonoController
         private Controllers _controllers;
 
         [Inject]
-        public void Construct(PlayerMove playerMove, CameraMove cameraMove)
+        public void Construct(PlayerMove playerMove, CameraMove cameraMove, PlayerShoot playerShoot)
         {
             _controllers = new Controllers();
             _controllers.AddController(playerMove);
             _controllers.AddController(cameraMove);
+            _controllers.AddController(playerShoot);
         }
         
         private void Awake()

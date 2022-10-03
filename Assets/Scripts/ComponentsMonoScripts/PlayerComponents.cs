@@ -10,6 +10,7 @@ namespace ComponentsMonoScripts
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer player;
         [SerializeField] private Transform shootPosition;
+        [SerializeField] private LineRenderer lineRenderer;
 
         public Transform GetTransform => playerTransform;
         public BoxCollider2D GetCollider => playerCollider;
@@ -17,5 +18,6 @@ namespace ComponentsMonoScripts
         public Animator GetAnimator => animator;
         public SpriteRenderer GetPlayer => player;
         public Transform GetShootPosition => shootPosition;
+        public LineRenderer GetLineRenderer => lineRenderer;
     }
 }

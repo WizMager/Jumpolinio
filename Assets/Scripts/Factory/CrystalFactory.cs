@@ -10,16 +10,18 @@ using Random = UnityEngine.Random;
 
 namespace Factory
 {
-    public class CrystalFactory : IFactory<CrystalView>
+    public class CrystalFactory : IFactory<List<CrystalView>>
     {
         private readonly Transform _root;
         private readonly GameObject _crystalPrefab;
         private readonly Dictionary<int, (bool isEmpty, Transform spawnPosition)> _spawnPositions;
+        private readonly int _crystalCount;
 
         public CrystalFactory(CrystalData crystalData, AllPlatformsComponents allPlatformsComponents)
         {
             _crystalPrefab = crystalData.crystalPrefab;
             _spawnPositions = FillSpawnDictionary(allPlatformsComponents.GetCrystalSpawnPositions);
+            _crystalCount = crystalData.crystalCount;
             
             var rootObject = new GameObject("Crystals");
             _root = rootObject.transform;
@@ -75,11 +77,17 @@ namespace Factory
             _spawnPositions[index] = spawnPosition; 
         }
         
-        public CrystalView Create()
+        public List<CrystalView> Create()
         {
-            return Object
-                .Instantiate(_crystalPrefab, _spawnPositions[GetEmptyRandomSpawnIndex(_spawnPositions.Count)].spawnPosition.position, Quaternion.identity, _root)
-                .GetComponent<CrystalView>();
+            var crystalsList = new List<CrystalView>(_crystalCount);
+            for (int i = 0; i < _crystalCount; i++)
+            {
+                crystalsList.Add(Object
+                    .Instantiate(_crystalPrefab, _spawnPositions[GetEmptyRandomSpawnIndex(_spawnPositions.Count)].spawnPosition.position, Quaternion.identity, _root)
+                    .GetComponent<CrystalView>());
+            }
+
+            return crystalsList;
         }
         
     }

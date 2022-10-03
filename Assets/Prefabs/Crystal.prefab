@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3376599354544502416}
   - component: {fileID: 8684963123415935378}
   - component: {fileID: 7834388851700803735}
+  - component: {fileID: 5716954119917131227}
   m_Layer: 0
   m_Name: Crystal
   m_TagString: Untagged
@@ -95,3 +96,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d077340554945b18c43193a51e0a13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 3
+  crystalPosition: {fileID: 3376599354544502416}
+--- !u!58 &5716954119917131227
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088851777651746406}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0700004, y: 1.9399999}
+  serializedVersion: 2
+  m_Radius: 5
