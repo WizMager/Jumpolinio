@@ -46,15 +46,21 @@ namespace MonoController.ControllerScripts
 
         private void OnDownHandler(InputAction.CallbackContext obj)
         {
-            if (_playerRigidbody.IsTouchingLayers(6)) return;
-            var contacts = new List<Collider2D>();
+            if (!_playerRigidbody.IsTouchingLayers(64)) return;
+            var contacts = new List<ContactPoint2D>();
             _playerRigidbody.GetContacts(contacts);
-            contacts[0].GetComponentInParent<PlatformView>().DisableCollider();
+            Debug.Log(contacts.Capacity);
+            foreach (var contact in contacts)
+            {
+                if (!contact.collider.CompareTag("Platform")) continue;
+                contact.collider.GetComponentInParent<PlatformView>().DisableCollider(); 
+                break;
+            }
         }
 
         private void OnJumpHandler(InputAction.CallbackContext obj)
         {
-            if (!_playerCollider.IsTouchingLayers()) return;
+            if (!_playerRigidbody.IsTouchingLayers(64)) return;
             _playerRigidbody.AddForce(_playerTransform.up * _jumpForce, ForceMode2D.Impulse);
         }
 
