@@ -22,13 +22,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "d80de42f-67ac-4f39-8922-09ed3fc935e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "2415f739-69fa-4f14-9421-884207e80b62",
-                    "path": "<Joystick>/trigger",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -50,7 +59,7 @@
                 {
                     "name": "negative",
                     "id": "2c31be95-4709-48d3-b083-ebea1a2d4d25",
-                    "path": "<Joystick>/stick/left",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -61,13 +70,24 @@
                 {
                     "name": "positive",
                     "id": "31951898-cebc-482f-877a-5ea0e2647bb5",
-                    "path": "<Joystick>/stick/right",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "103268b3-d292-410c-a44f-a9ca701ed3a0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

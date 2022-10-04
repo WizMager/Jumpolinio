@@ -44,13 +44,22 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""d80de42f-67ac-4f39-8922-09ed3fc935e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""2415f739-69fa-4f14-9421-884207e80b62"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -72,7 +81,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""2c31be95-4709-48d3-b083-ebea1a2d4d25"",
-                    ""path"": ""<Joystick>/stick/left"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -83,13 +92,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""31951898-cebc-482f-877a-5ea0e2647bb5"",
-                    ""path"": ""<Joystick>/stick/right"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""103268b3-d292-410c-a44f-a9ca701ed3a0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -100,6 +120,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_TouchInput = asset.FindActionMap("TouchInput", throwIfNotFound: true);
         m_TouchInput_Jump = m_TouchInput.FindAction("Jump", throwIfNotFound: true);
         m_TouchInput_Move = m_TouchInput.FindAction("Move", throwIfNotFound: true);
+        m_TouchInput_Down = m_TouchInput.FindAction("Down", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,12 +182,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private ITouchInputActions m_TouchInputActionsCallbackInterface;
     private readonly InputAction m_TouchInput_Jump;
     private readonly InputAction m_TouchInput_Move;
+    private readonly InputAction m_TouchInput_Down;
     public struct TouchInputActions
     {
         private @Controls m_Wrapper;
         public TouchInputActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_TouchInput_Jump;
         public InputAction @Move => m_Wrapper.m_TouchInput_Move;
+        public InputAction @Down => m_Wrapper.m_TouchInput_Down;
         public InputActionMap Get() { return m_Wrapper.m_TouchInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -182,6 +205,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_TouchInputActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_TouchInputActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_TouchInputActionsCallbackInterface.OnMove;
+                @Down.started -= m_Wrapper.m_TouchInputActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_TouchInputActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_TouchInputActionsCallbackInterface.OnDown;
             }
             m_Wrapper.m_TouchInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -192,6 +218,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
             }
         }
     }
@@ -200,5 +229,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
     }
 }

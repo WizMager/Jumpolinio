@@ -1,8 +1,10 @@
-﻿using ComponentsMonoScripts;
+﻿using System.Collections.Generic;
+using ComponentsMonoScripts;
 using Data;
 using MonoController.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Views;
 
 namespace MonoController.ControllerScripts
 {
@@ -39,8 +41,17 @@ namespace MonoController.ControllerScripts
         {
             _controls.TouchInput.Enable();
             _controls.TouchInput.Jump.performed += OnJumpHandler;
+            _controls.TouchInput.Down.performed += OnDownHandler;
         }
-    
+
+        private void OnDownHandler(InputAction.CallbackContext obj)
+        {
+            if (_playerRigidbody.IsTouchingLayers(6)) return;
+            var contacts = new List<Collider2D>();
+            _playerRigidbody.GetContacts(contacts);
+            contacts[0].GetComponentInParent<PlatformView>().DisableCollider();
+        }
+
         private void OnJumpHandler(InputAction.CallbackContext obj)
         {
             if (!_playerCollider.IsTouchingLayers()) return;
